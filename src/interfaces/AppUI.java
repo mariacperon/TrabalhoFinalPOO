@@ -4,8 +4,6 @@
  */
 package interfaces;
 
-import entity.Retangulo;
-
 /**
  *
  * @author evand

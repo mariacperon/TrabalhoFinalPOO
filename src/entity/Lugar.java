@@ -5,6 +5,8 @@
  */
 package entity;
 
+import java.util.List;
+
 /**
  *
  * @author mcpgoncalves
@@ -13,8 +15,9 @@ public class Lugar extends Termo{
     
     private String descricaoDetalhada;
 
-    public Lugar(String descricaoDetalhada, Termo termo) {
-        super(termo);
+    public Lugar(int id, String nome, String descricao, List<Obra> obras,
+            String descricaoDetalhada, Termo termo) {
+        super(id, nome, descricao, obras);
         this.descricaoDetalhada = descricaoDetalhada;
     }
 

@@ -11,18 +11,18 @@ import java.util.List;
  *
  * @author mcpgoncalves
  */
-public class Termo {
+public abstract class Termo {
     
     private int id;
     private String nome;
     private String descricao;
     private List<Obra> obras;
 
-    public Termo(Termo termo) {
-        this.id = termo.getId();
-        this.nome = termo.nome;
-        this.descricao = termo.descricao;
-        this.obras = termo.obras;
+    public Termo(int id, String nome, String descricao, List<Obra> obras) {
+        this.id = id;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.obras = obras;
     }
 
     public int getId() {

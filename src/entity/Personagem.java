@@ -17,9 +17,9 @@ public class Personagem extends Termo{
     private List<String> atores;
     private String feitos;
 
-    public Personagem(Termo termo, String caracteristicas, List<String> atores, 
-            String feitos) {
-        super(termo);
+    public Personagem(int id, String nome, String descricao, List<Obra> obras,
+            String caracteristicas, List<String> atores, String feitos) {
+        super(id, nome, descricao, obras);
         this.caracteristicas = caracteristicas;
         this.atores = atores;
         this.feitos = feitos;
@@ -47,7 +47,6 @@ public class Personagem extends Termo{
 
     public void setFeitos(String feitos) {
         this.feitos = feitos;
-    }
-    
+    }    
     
 }
