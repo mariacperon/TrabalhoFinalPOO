@@ -5,7 +5,8 @@
  */
 package entity;
 
-import java.util.List;
+import config.ConfigArquivos;
+import java.util.UUID;
 
 /**
  *
@@ -14,11 +15,18 @@ import java.util.List;
 public class Lugar extends Termo{
     
     private String descricaoDetalhada;
+    
+    private ConfigArquivos configArquivos;
 
-    public Lugar(int id, String nome, String descricao, List<Obra> obras,
-            String descricaoDetalhada, Termo termo) {
-        super(id, nome, descricao, obras);
+    public Lugar(String nome, String descricao, String descricaoDetalhada) {
+        super(UUID.randomUUID(), nome, descricao);
         this.descricaoDetalhada = descricaoDetalhada;
+    }
+    
+    public Lugar cadastrarLugar(String nome, String descricao, String descricaoDetalhada) {
+        Lugar lugar = new Lugar(nome, descricao, descricaoDetalhada);
+        configArquivos.salvarLugar(lugar);
+        return lugar;
     }
 
     public String getDescricaoDetalhada() {

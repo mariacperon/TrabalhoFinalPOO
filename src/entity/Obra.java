@@ -5,7 +5,9 @@
  */
 package entity;
 
+import config.ConfigArquivos;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  *
@@ -13,24 +15,27 @@ import java.util.Date;
  */
 public class Obra {
     
-    private int id;
     private String nome;
     private Date anoLancamento;
     private Categoria categoria;
+    private UUID uuidTermo;
+    
+    private ConfigArquivos configArquivos;
+    
+    public Obra() {
+    }
 
-    public Obra(int id, String nome, Date anoLancamento, Categoria categoria) {
-        this.id = id;
+    public Obra(String nome, Date anoLancamento, Categoria categoria, UUID uuidTermo) {
         this.nome = nome;
         this.anoLancamento = anoLancamento;
         this.categoria = categoria;
+        this.uuidTermo = uuidTermo;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    
+    public Obra cadastrarObra(String nome, Date anoLancamento, Categoria categoria, UUID uuidTermo) {
+        Obra newObra = new Obra(nome, anoLancamento, categoria, uuidTermo);
+        configArquivos.salvarObra(newObra);
+        return newObra;
     }
 
     public String getNome() {
@@ -56,5 +61,15 @@ public class Obra {
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
+
+    public UUID getUuidTermo() {
+        return uuidTermo;
+    }
+
+    public void setUuidTermo(UUID uuidTermo) {
+        this.uuidTermo = uuidTermo;
+    }
+    
+    
     
 }

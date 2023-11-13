@@ -5,7 +5,9 @@
  */
 package entity;
 
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -13,23 +15,28 @@ import java.util.List;
  */
 public abstract class Termo {
     
-    private int id;
+    private UUID id;
     private String nome;
     private String descricao;
     private List<Obra> obras;
 
-    public Termo(int id, String nome, String descricao, List<Obra> obras) {
+    public Termo(UUID id, String nome, String descricao) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
-        this.obras = obras;
+    }
+    
+    public void cadastrarObra(String nome, Date anoLancamento, Categoria categoria, UUID uuidTermo) {
+        Obra newObra = new Obra();
+        newObra.cadastrarObra(nome, anoLancamento, categoria, uuidTermo);
+        obras.add(newObra);
     }
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

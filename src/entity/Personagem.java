@@ -5,7 +5,9 @@
  */
 package entity;
 
+import config.ConfigArquivos;
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -16,13 +18,23 @@ public class Personagem extends Termo{
     private String caracteristicas;
     private List<String> atores;
     private String feitos;
+    
+    private ConfigArquivos configArquivos;
 
-    public Personagem(int id, String nome, String descricao, List<Obra> obras,
+    public Personagem(String nome, String descricao, 
             String caracteristicas, List<String> atores, String feitos) {
-        super(id, nome, descricao, obras);
+        super(UUID.randomUUID(), nome, descricao);
         this.caracteristicas = caracteristicas;
         this.atores = atores;
         this.feitos = feitos;
+    }
+
+    public Personagem cadastrarPersonagem(String nome, String descricao, List<Obra> obras,
+            String caracteristicas, List<String> atores, String feitos) {
+        Personagem personagem = 
+                new Personagem(nome, descricao, caracteristicas, atores, feitos);
+        configArquivos.salvarPersonagem(personagem);
+        return personagem;
     }
 
     public String getCaracteristicas() {
