@@ -19,7 +19,7 @@ import java.io.ObjectOutputStream;
 public class ConfigArquivos {
     
     public void salvarPersonagem(Personagem personagem) {        
-        File arquivo = new File("ect..\\..\\Personagem.csv");
+        File arquivo = new File("ect\\Personagem.csv");
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(arquivo))) {
             oos.writeObject(personagem);
             oos.flush();
@@ -28,18 +28,10 @@ public class ConfigArquivos {
         }
     }
     
-    public void salvarLugar(Lugar lugar) {        
-        File arquivo = new File("ect..\\..\\Lugar.csv");
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(arquivo))) {
-            oos.writeObject(lugar);
-            oos.flush();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
+    
     
     public void salvarGeral(TermoGeral termoGeral) {        
-        File arquivo = new File("ect..\\..\\Geral.csv");
+        File arquivo = new File("ect\\Geral.csv");
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(arquivo))) {
             oos.writeObject(termoGeral);
             oos.flush();
@@ -49,7 +41,7 @@ public class ConfigArquivos {
     }
     
     public void salvarObra(Obra obra) {        
-        File arquivo = new File("ect..\\..\\Obra.csv");
+        File arquivo = new File("ect\\Obra.csv");
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(arquivo))) {
             oos.writeObject(obra);
             oos.flush();

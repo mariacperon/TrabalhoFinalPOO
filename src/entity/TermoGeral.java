@@ -5,6 +5,7 @@
 package entity;
 
 import config.ConfigArquivos;
+import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
@@ -12,7 +13,7 @@ import java.util.UUID;
  *
  * @author note-maria
  */
-public class TermoGeral extends Termo{
+public class TermoGeral extends Termo implements Serializable{
     
     private ConfigArquivos configArquivos;
 

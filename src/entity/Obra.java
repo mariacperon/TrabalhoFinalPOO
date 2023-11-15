@@ -6,6 +6,7 @@
 package entity;
 
 import config.ConfigArquivos;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
@@ -13,7 +14,7 @@ import java.util.UUID;
  *
  * @author mcpgoncalves
  */
-public class Obra {
+public class Obra implements Serializable{
     
     private String nome;
     private Date anoLancamento;

@@ -6,6 +6,7 @@
 package entity;
 
 import config.ConfigArquivos;
+import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,7 +14,7 @@ import java.util.UUID;
  *
  * @author mcpgoncalves
  */
-public class Personagem extends Termo{
+public class Personagem extends Termo implements Serializable{
     
     private String caracteristicas;
     private List<String> atores;

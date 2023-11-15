@@ -5,6 +5,7 @@
  */
 package entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -13,7 +14,7 @@ import java.util.UUID;
  *
  * @author mcpgoncalves
  */
-public abstract class Termo {
+public abstract class Termo implements Serializable{
     
     private UUID id;
     private String nome;
