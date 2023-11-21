@@ -33,9 +33,14 @@ public class Lugar extends Termo implements Serializable{
     }
     
     public void cadastrarLugares(List<Lugar> lugares) {        
-        System.out.println("iniciando salvar lugar");
-        salvarLugar(lugares);
-        System.out.println("finalizando salvar lugar");
+        List<Lugar> lugaresNew = retornaLugares();
+        
+        System.out.println("iniciando salvar lugares");
+        lugaresNew.addAll(lugares);
+        
+        salvarLugar(lugaresNew);
+        
+        System.out.println("finalizando salvar lugares");
     }
     
     private void salvarLugar(List<Lugar> lugares) {        

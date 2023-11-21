@@ -26,7 +26,7 @@ public class Main {
         Lugar lugar2 = new Lugar("teste2", "teste", "teixte");
         
         Obra obr1 = new Obra("teste", new Date(2023, 1, 1), 
-                Categoria.SERIE);
+                Categoria.JOGOS);
         Obra obr2 = new Obra("teste2", new Date(2023, 1, 1), 
                 Categoria.FILME);
         
