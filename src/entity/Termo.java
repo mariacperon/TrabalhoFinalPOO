@@ -16,29 +16,15 @@ import java.util.UUID;
  */
 public abstract class Termo implements Serializable{
     
-    private UUID id;
     private String nome;
     private String descricao;
     private List<Obra> obras;
+    
+    public Termo() {}
 
-    public Termo(UUID id, String nome, String descricao) {
-        this.id = id;
+    public Termo(String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;
-    }
-    
-    public void cadastrarObra(String nome, Date anoLancamento, Categoria categoria, UUID uuidTermo) {
-        Obra newObra = new Obra();
-        newObra.cadastrarObra(nome, anoLancamento, categoria, uuidTermo);
-        obras.add(newObra);
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public String getNome() {
@@ -64,7 +50,23 @@ public abstract class Termo implements Serializable{
     public void setObras(List<Obra> obras) {
         this.obras = obras;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        if (obras == null)
+            return "null";
+            
+        StringBuilder sb = new StringBuilder();
+        
+        for(int i=0; i < obras.size(); i++) {
+            sb.append(obras.get(i));
+            
+            if (obras.size() != (i-1)) {
+                sb.append(", ");
+            }
+        }
+        
+        return sb.toString();
+    }
     
 }

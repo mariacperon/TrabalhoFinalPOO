@@ -4,7 +4,6 @@
  */
 package entity;
 
-import config.ConfigArquivos;
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
@@ -14,17 +13,9 @@ import java.util.UUID;
  * @author note-maria
  */
 public class TermoGeral extends Termo implements Serializable{
-    
-    private ConfigArquivos configArquivos;
 
     public TermoGeral(String nome, String descricao) {
-        super(UUID.randomUUID(), nome, descricao);
-    }
-    
-    public TermoGeral cadastrarTermo(String nome, String descricao) {
-        TermoGeral termoGeral = new TermoGeral(nome, descricao);
-        configArquivos.salvarGeral(termoGeral);
-        return termoGeral;
+        super(nome, descricao);
     }
     
 }

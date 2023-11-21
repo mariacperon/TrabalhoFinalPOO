@@ -5,7 +5,6 @@
  */
 package entity;
 
-import config.ConfigArquivos;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
@@ -19,26 +18,16 @@ public class Obra implements Serializable{
     private String nome;
     private Date anoLancamento;
     private Categoria categoria;
-    private UUID uuidTermo;
-    
-    private ConfigArquivos configArquivos;
     
     public Obra() {
     }
 
-    public Obra(String nome, Date anoLancamento, Categoria categoria, UUID uuidTermo) {
+    public Obra(String nome, Date anoLancamento, Categoria categoria) {
         this.nome = nome;
         this.anoLancamento = anoLancamento;
         this.categoria = categoria;
-        this.uuidTermo = uuidTermo;
     }
     
-    public Obra cadastrarObra(String nome, Date anoLancamento, Categoria categoria, UUID uuidTermo) {
-        Obra newObra = new Obra(nome, anoLancamento, categoria, uuidTermo);
-        configArquivos.salvarObra(newObra);
-        return newObra;
-    }
-
     public String getNome() {
         return nome;
     }
@@ -63,14 +52,16 @@ public class Obra implements Serializable{
         this.categoria = categoria;
     }
 
-    public UUID getUuidTermo() {
-        return uuidTermo;
+    @Override
+    public String toString() {    
+        StringBuilder sb = new StringBuilder();
+        sb.append("Obra={");
+        sb.append("nome=").append(nome);
+        sb.append(", anoLancamento=").append(anoLancamento);
+        sb.append(", catergoria=").append(categoria);
+        sb.append("}");
+        
+        return sb.toString();
     }
-
-    public void setUuidTermo(UUID uuidTermo) {
-        this.uuidTermo = uuidTermo;
-    }
-    
-    
     
 }

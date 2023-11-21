@@ -1,6 +1,11 @@
 package interfaces;
 
+import entity.Categoria;
 import entity.Lugar;
+import entity.Obra;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,17 +20,20 @@ import entity.Lugar;
 public class Main {
     
     public static void main(String[] args) {
-        
-        System.out.println("iniciando salvar lugar");
-        
+        Lugar lugarConfig = new Lugar();
+       
         Lugar lugar = new Lugar("teste", "teste teste", "testetestetestes");
-        lugar.cadastrarLugar(lugar);
-        
         Lugar lugar2 = new Lugar("teste2", "teste", "teixte");
-        lugar.cadastrarLugar(lugar2);
         
-        System.out.println(lugar.retornaLugar());
+        Obra obr1 = new Obra("teste", new Date(2023, 1, 1), 
+                Categoria.SERIE);
+        Obra obr2 = new Obra("teste2", new Date(2023, 1, 1), 
+                Categoria.FILME);
         
-        System.out.println("finalizando salvar lugar");
+        lugar.setObras(List.of(obr1, obr2));
+        
+        lugarConfig.cadastrarLugares(List.of(lugar, lugar2));
+        
+        System.out.println(lugar.retornaLugares());
     }
 }

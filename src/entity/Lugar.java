@@ -5,7 +5,6 @@
  */
 package entity;
 
-import config.ConfigArquivos;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -23,33 +22,37 @@ import java.util.UUID;
 public class Lugar extends Termo implements Serializable{
     
     private String descricaoDetalhada;
-    private int teste;
+    
+    public Lugar(){
+        super();
+    }
 
     public Lugar(String nome, String descricao, String descricaoDetalhada) {
-        super(UUID.randomUUID(), nome, descricao);
+        super(nome, descricao);
         this.descricaoDetalhada = descricaoDetalhada;
     }
     
-    public Lugar cadastrarLugar(Lugar lugar) {
-        salvarLugar(lugar);
-        return lugar;
+    public void cadastrarLugares(List<Lugar> lugares) {        
+        System.out.println("iniciando salvar lugar");
+        salvarLugar(lugares);
+        System.out.println("finalizando salvar lugar");
     }
     
-    private void salvarLugar(Lugar lugar) {        
+    private void salvarLugar(List<Lugar> lugares) {        
         File arquivo = new File("ect\\Lugar.dat");
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(arquivo))) {
-            oos.writeObject(lugar);
+            oos.writeObject(lugares);
             oos.flush();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
     
-    public List<Lugar> retornaLugar() {
+    public List<Lugar> retornaLugares() {
         List<Lugar> lugares = new ArrayList<>();
         File arquivo = new File("ect\\Lugar.dat");
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(arquivo))) {
-            List<Lugar> lugaresRetorno = (ArrayList) ois.readObject();
+            List<Lugar> lugaresRetorno = (List<Lugar>) ois.readObject();
             
             for (Lugar lugar : lugaresRetorno) {
                 lugares.add(lugar);
@@ -72,9 +75,9 @@ public class Lugar extends Termo implements Serializable{
     @Override
     public String toString() {
         return "Lugar{" + 
-                "id=" + getId() +
-                ", nome=" + getNome() +
+                "nome=" + getNome() +
                 ", descricao=" + getDescricao() +
+                ", obras=" + getObras() +
                 ", descricaoDetalhada=" + descricaoDetalhada + 
                 '}';
     }

@@ -5,8 +5,13 @@
  */
 package entity;
 
-import config.ConfigArquivos;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,22 +25,53 @@ public class Personagem extends Termo implements Serializable{
     private List<String> atores;
     private String feitos;
     
-    private ConfigArquivos configArquivos;
+    public Personagem(){
+        super();
+    }
 
     public Personagem(String nome, String descricao, 
             String caracteristicas, List<String> atores, String feitos) {
-        super(UUID.randomUUID(), nome, descricao);
+        super(nome, descricao);
         this.caracteristicas = caracteristicas;
         this.atores = atores;
         this.feitos = feitos;
     }
-
-    public Personagem cadastrarPersonagem(String nome, String descricao, List<Obra> obras,
-            String caracteristicas, List<String> atores, String feitos) {
-        Personagem personagem = 
-                new Personagem(nome, descricao, caracteristicas, atores, feitos);
-        configArquivos.salvarPersonagem(personagem);
-        return personagem;
+    
+    public void cadastrarPersonagens(List<Personagem> personagens) {
+        List<Personagem> personagensNew = retornaPersonagens();
+        
+        System.out.println("iniciando salvar personagem");
+        personagensNew.addAll(personagens);
+        
+        salvarPersonagem(personagensNew);
+        
+        System.out.println("finalizando salvar personagem");
+    }
+    
+    private void salvarPersonagem(List<Personagem> personagens) {        
+        File arquivo = new File("ect\\Personagem.dat");
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(arquivo))) {
+            oos.writeObject(personagens);
+            oos.flush();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public List<Personagem> retornaPersonagens() {
+        List<Personagem> personagens = new ArrayList<>();
+        File arquivo = new File("ect\\Personagem.dat");
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(arquivo))) {
+            List<Personagem> personagensRetorno = (List<Personagem>) ois.readObject();
+            
+            for (Personagem personagem : personagensRetorno) {
+                personagens.add(personagem);
+            }
+        } catch (Exception ex) {
+            return personagens;
+        }
+        
+        return personagens;
     }
 
     public String getCaracteristicas() {
