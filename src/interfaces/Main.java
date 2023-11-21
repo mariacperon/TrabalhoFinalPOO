@@ -20,7 +20,7 @@ import java.util.List;
 public class Main {
     
     public static void main(String[] args) {
-        Lugar lugarConfig = new Lugar();
+        /*Lugar lugarConfig = new Lugar();
        
         Lugar lugar = new Lugar("teste", "teste teste", "testetestetestes");
         Lugar lugar2 = new Lugar("teste2", "teste", "teixte");
@@ -34,6 +34,6 @@ public class Main {
         
         lugarConfig.cadastrarLugares(List.of(lugar, lugar2));
         
-        System.out.println(lugar.retornaLugares());
+        System.out.println(lugar.retornaLugares());*/
     }
 }

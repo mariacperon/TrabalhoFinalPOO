@@ -22,14 +22,13 @@ public class TermoGeral extends Termo implements Serializable{
 
     public TermoGeral(String nome, String descricao) {
         super(nome, descricao);
-    }
+    }  
     
-    
-    public void cadastrarTermosGerais(List<TermoGeral> termosGerais) {
+    public void cadastrarTermoGeral(TermoGeral termoGeral) {
         List<TermoGeral> termosGeraisNew = retornaTermosGerais();
         
         System.out.println("iniciando salvar TermoGeral");
-        termosGeraisNew.addAll(termosGerais);
+        termosGeraisNew.add(termoGeral);
         
         salvarTermoGeral(termosGeraisNew);
         

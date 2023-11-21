@@ -32,11 +32,11 @@ public class Lugar extends Termo implements Serializable{
         this.descricaoDetalhada = descricaoDetalhada;
     }
     
-    public void cadastrarLugares(List<Lugar> lugares) {        
+    public void cadastrarLugar(Lugar lugar) {        
         List<Lugar> lugaresNew = retornaLugares();
         
         System.out.println("iniciando salvar lugares");
-        lugaresNew.addAll(lugares);
+        lugaresNew.add(lugar);
         
         salvarLugar(lugaresNew);
         

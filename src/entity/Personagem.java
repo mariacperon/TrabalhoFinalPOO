@@ -37,11 +37,11 @@ public class Personagem extends Termo implements Serializable{
         this.feitos = feitos;
     }
     
-    public void cadastrarPersonagens(List<Personagem> personagens) {
+    public void cadastrarPersonagem(Personagem personagem) {
         List<Personagem> personagensNew = retornaPersonagens();
         
         System.out.println("iniciando salvar personagem");
-        personagensNew.addAll(personagens);
+        personagensNew.add(personagem);
         
         salvarPersonagem(personagensNew);
         
