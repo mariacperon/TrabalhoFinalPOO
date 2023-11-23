@@ -20,20 +20,24 @@ import java.util.List;
 public class Main {
     
     public static void main(String[] args) {
-        /*Lugar lugarConfig = new Lugar();
-       
-        Lugar lugar = new Lugar("teste", "teste teste", "testetestetestes");
-        Lugar lugar2 = new Lugar("teste2", "teste", "teixte");
+        Lugar lugarConfig = new Lugar();
         
-        Obra obr1 = new Obra("teste", new Date(2023, 1, 1), 
-                Categoria.JOGOS);
-        Obra obr2 = new Obra("teste2", new Date(2023, 1, 1), 
-                Categoria.FILME);
+        lugarConfig.cadastrarLugar(mockarLugar());
+        
+        System.out.println(lugarConfig.retornaLugares());
+        
+        List<Lugar> lugares = lugarConfig.buscarLugares("JOGO");
+        
+        System.out.println(lugares);
+    }
+    
+    private static Lugar mockarLugar() {
+        Lugar lugar = new Lugar("jardim", "teste teste", "testetestetestes");
+        Obra obr1 = new Obra("teste", Categoria.JOGOS, 2023, 1, 1);
+        Obra obr2 = new Obra("teste2", Categoria.FILME, 2024, 1, 1);
         
         lugar.setObras(List.of(obr1, obr2));
         
-        lugarConfig.cadastrarLugares(List.of(lugar, lugar2));
-        
-        System.out.println(lugar.retornaLugares());*/
+        return lugar;
     }
 }

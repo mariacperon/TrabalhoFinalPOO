@@ -11,9 +11,11 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -49,7 +51,7 @@ public class Lugar extends Termo implements Serializable{
             oos.writeObject(lugares);
             oos.flush();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            return;
         }
     }
     
@@ -63,10 +65,41 @@ public class Lugar extends Termo implements Serializable{
                 lugares.add(lugar);
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            return lugares;
         }
         
         return lugares;
+    }
+    
+    public List<Lugar> buscarLugares(String termo) {
+        System.out.println("iniciando pesquisa de lugares por termo");
+        List<Lugar> lugares = retornaLugares();
+        List<Lugar> pesquisaLugares = new ArrayList<>();
+        
+        for(Lugar lugar: lugares){
+            if (lugar.descricaoDetalhada.toLowerCase().contains(termo.toLowerCase())) {
+                pesquisaLugares.add(lugar);
+            } else if (lugar.getNome().toLowerCase().contains(termo.toLowerCase())) {
+                pesquisaLugares.add(lugar);
+            } else if (lugar.getDescricao().toLowerCase().contains(termo.toLowerCase())) {
+                pesquisaLugares.add(lugar);
+            } else {
+                for(Obra obra : lugar.getObras()) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+                    if (sdf.format(obra.getAnoLancamento()).contains(termo.toLowerCase())) {
+                        pesquisaLugares.add(lugar);
+                    } else if(obra.getNome().toLowerCase().contains(termo.toLowerCase())) {
+                        pesquisaLugares.add(lugar);
+                    } else if (obra.getCategoria().toString().toLowerCase().contains(termo.toLowerCase())) {
+                        pesquisaLugares.add(lugar);
+                    }
+                }
+            }
+        }
+        
+        System.out.println("finalizando pesquisa de lugares por termo");
+        
+        return pesquisaLugares;
     }
 
     public String getDescricaoDetalhada() {

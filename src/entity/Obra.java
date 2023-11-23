@@ -22,9 +22,9 @@ public class Obra implements Serializable{
     public Obra() {
     }
 
-    public Obra(String nome, Date anoLancamento, Categoria categoria) {
+    public Obra(String nome, Categoria categoria, int ANO, int MES, int DIA) {
         this.nome = nome;
-        this.anoLancamento = anoLancamento;
+        this.anoLancamento = new Date(ANO-1900, MES-1, DIA);
         this.categoria = categoria;
     }
     
