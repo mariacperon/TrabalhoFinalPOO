@@ -26,6 +26,12 @@ public class FileConfig implements Serializable{
     public static String FILE_LUGAR = "Lugar.dat";
     public static String FILE_GERAL = "Geral.dat";
     
+    /**
+     * Recebe uma lista de termos e cadastra no arquivo de acordo com a sua 
+     * instancia
+     * 
+     * @param termos 
+     */
     public void salvarTermo(List<? extends Termo> termos) {        
         File arquivo = new File("ect\\"+  retornaFileName(termos.get(0)));
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(arquivo))) {
@@ -36,6 +42,13 @@ public class FileConfig implements Serializable{
         }
     }
     
+    /**
+     * Recebe uma instancia de termo e retorna a lista de termos cadastradas no
+     * arquivo de acordo com a instancia
+     * 
+     * @param termo
+     * @return lista de termos
+     */
     public List<? extends Termo> retornaTermos(Termo termo) {
         List<? extends Termo> termos = new ArrayList<>();
         File arquivo = new File("ect\\"+ retornaFileName(termo));

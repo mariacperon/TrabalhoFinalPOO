@@ -5,17 +5,10 @@
  */
 package entity;
 
-import config.FileConfig;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -39,6 +32,11 @@ public class Personagem extends Termo implements Serializable{
         this.feitos = feitos;
     }
     
+    /**
+     * Este método recebe um Personagem para ser cadastrado no arquivo Personagem.dat
+     * 
+     * @param termo instanceof Personagem
+     */
     @Override
     public void cadastrarTermo(Termo termo) {
         List<Personagem> personagensNew = (List<Personagem>) retornaTermos();
@@ -51,13 +49,25 @@ public class Personagem extends Termo implements Serializable{
         System.out.println("finalizando salvar personagem");    
     }
 
+    /**
+     * Este método retorna todos os personagens já cadastrados no arquivo Personagem.dat
+     * 
+     * @return lista de termos instanceof Personagem
+     */
     @Override
     public List<? extends Termo> retornaTermos() {
         return fileConfig.retornaTermos(new Personagem());
     }
 
+    /**
+     * Este método recebe uma string que remete ao campo desejado para filtrar 
+     * e retorna uma lista de termos instanceof Personagem que se adequam ao filtro
+     * 
+     * @param filtro
+     * @return lista de termos instanceof Personagem que se adequam ao filtro inserido
+     */
     @Override
-    public List<? extends Termo> filtrarTermos(String termo) {
+    public List<? extends Termo> filtrarTermos(String filtro) {
         System.out.println("iniciando pesquisa de personagens por termo");
         List<Personagem> personagens = (List<Personagem>) retornaTermos();
         List<Personagem> pesquisaPersonagens = new ArrayList<>();
@@ -65,24 +75,24 @@ public class Personagem extends Termo implements Serializable{
         for(Personagem personagem: personagens){
             personagem.getAtores().forEach(a -> a.toLowerCase());
             
-            if (personagem.caracteristicas.toLowerCase().contains(termo.toLowerCase())) {
+            if (personagem.caracteristicas.toLowerCase().contains(filtro.toLowerCase())) {
                 pesquisaPersonagens.add(personagem);
-            } else if (personagem.feitos.toLowerCase().contains(termo.toLowerCase())) {
+            } else if (personagem.feitos.toLowerCase().contains(filtro.toLowerCase())) {
                 pesquisaPersonagens.add(personagem);
-            } else if (personagem.getNome().toLowerCase().contains(termo.toLowerCase())) {
+            } else if (personagem.getNome().toLowerCase().contains(filtro.toLowerCase())) {
                 pesquisaPersonagens.add(personagem);
-            } else if (personagem.getDescricao().toLowerCase().contains(termo.toLowerCase())) {
+            } else if (personagem.getDescricao().toLowerCase().contains(filtro.toLowerCase())) {
                 pesquisaPersonagens.add(personagem);
-            } else if (personagem.getAtores().contains(termo.toLowerCase())) {
+            } else if (personagem.getAtores().contains(filtro.toLowerCase())) {
                 pesquisaPersonagens.add(personagem);
             } else {
                 for(Obra obra : personagem.getObras()) {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
-                    if (sdf.format(obra.getAnoLancamento()).contains(termo.toLowerCase())) {
+                    if (sdf.format(obra.getAnoLancamento()).contains(filtro.toLowerCase())) {
                         pesquisaPersonagens.add(personagem);
-                    } else if(obra.getNome().toLowerCase().contains(termo.toLowerCase())) {
+                    } else if(obra.getNome().toLowerCase().contains(filtro.toLowerCase())) {
                         pesquisaPersonagens.add(personagem);
-                    } else if (obra.getCategoria().toString().toLowerCase().contains(termo.toLowerCase())) {
+                    } else if (obra.getCategoria().toString().toLowerCase().contains(filtro.toLowerCase())) {
                         pesquisaPersonagens.add(personagem);
                     }
                 }

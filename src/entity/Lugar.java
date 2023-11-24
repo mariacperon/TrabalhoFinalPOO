@@ -5,16 +5,9 @@
  */
 package entity;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -34,6 +27,11 @@ public class Lugar extends Termo implements Serializable{
         this.descricaoDetalhada = descricaoDetalhada;
     }
     
+    /**
+     * Este método recebe um Lugar para ser cadastrado no arquivo Lugar.dat
+     * 
+     * @param termo instanceof Lugar
+     */
     @Override
     public void cadastrarTermo(Termo termo) {
         List<Lugar> lugaresNew = (List<Lugar>) retornaTermos();
@@ -46,32 +44,44 @@ public class Lugar extends Termo implements Serializable{
         System.out.println("finalizando salvar lugares");
     }
     
+    /**
+     * Este método retorna todos os lugares já cadastrados no arquivo Lugar.dat
+     * 
+     * @return lista de termos instanceof Lugar
+     */
     @Override
     public List<? extends Termo> retornaTermos() {
         return fileConfig.retornaTermos(new Lugar());
     }
     
+    /**
+     * Este método recebe uma string que remete ao campo desejado para filtrar 
+     * e retorna uma lista de termos instanceof Lugar que se adequam ao filtro
+     * 
+     * @param filtro
+     * @return lista de termos instanceof Lugar que se adequam ao filtro inserido
+     */
     @Override
-    public List<? extends Termo> filtrarTermos(String termo) {
+    public List<? extends Termo> filtrarTermos(String filtro) {
         System.out.println("iniciando pesquisa de lugares por termo");
         List<Lugar> lugares = (List<Lugar>) retornaTermos();
         List<Lugar> pesquisaLugares = new ArrayList<>();
         
         for(Lugar lugar: lugares){
-            if (lugar.descricaoDetalhada.toLowerCase().contains(termo.toLowerCase())) {
+            if (lugar.descricaoDetalhada.toLowerCase().contains(filtro.toLowerCase())) {
                 pesquisaLugares.add(lugar);
-            } else if (lugar.getNome().toLowerCase().contains(termo.toLowerCase())) {
+            } else if (lugar.getNome().toLowerCase().contains(filtro.toLowerCase())) {
                 pesquisaLugares.add(lugar);
-            } else if (lugar.getDescricao().toLowerCase().contains(termo.toLowerCase())) {
+            } else if (lugar.getDescricao().toLowerCase().contains(filtro.toLowerCase())) {
                 pesquisaLugares.add(lugar);
             } else {
                 for(Obra obra : lugar.getObras()) {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
-                    if (sdf.format(obra.getAnoLancamento()).contains(termo.toLowerCase())) {
+                    if (sdf.format(obra.getAnoLancamento()).contains(filtro.toLowerCase())) {
                         pesquisaLugares.add(lugar);
-                    } else if(obra.getNome().toLowerCase().contains(termo.toLowerCase())) {
+                    } else if(obra.getNome().toLowerCase().contains(filtro.toLowerCase())) {
                         pesquisaLugares.add(lugar);
-                    } else if (obra.getCategoria().toString().toLowerCase().contains(termo.toLowerCase())) {
+                    } else if (obra.getCategoria().toString().toLowerCase().contains(filtro.toLowerCase())) {
                         pesquisaLugares.add(lugar);
                     }
                 }
