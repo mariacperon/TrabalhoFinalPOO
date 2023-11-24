@@ -39,7 +39,7 @@ public class Lugar extends Termo implements Serializable{
         System.out.println("iniciando salvar lugares");
         lugaresNew.add((Lugar) termo);
         
-        fileConfig.salvarTermo(lugaresNew);
+        cadastrarLugares(lugaresNew);
         
         System.out.println("finalizando salvar lugares");
     }
@@ -91,6 +91,31 @@ public class Lugar extends Termo implements Serializable{
         System.out.println("finalizando pesquisa de lugares por termo");
         
         return pesquisaLugares;
+    }
+    
+    /**
+     * Recebe o lugar a ser excluido e o remove do arquivo Lugar.dat
+     * 
+     * @param termo instanceof Lugar
+     */
+    @Override
+    public void removerTermo(Termo termo) {
+        List<Lugar> lugares = (List<Lugar>) retornaTermos();
+        Lugar p = (Lugar) termo;
+        
+        lugares.removeIf(x -> ehIgual(p, x));
+        
+        cadastrarLugares(lugares);
+    }
+    
+    private void cadastrarLugares(List<Lugar> lugares) {
+        fileConfig.salvarTermo(lugares);
+    }
+    
+    private boolean ehIgual (Lugar p, Lugar x) {
+        return x.getNome().equals(p.getNome()) &&
+                    x.getDescricaoDetalhada().equals(p.getDescricaoDetalhada()) &&
+                    x.getDescricao().equals(p.getDescricao());
     }
     
     public String getDescricaoDetalhada() {

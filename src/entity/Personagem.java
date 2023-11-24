@@ -44,7 +44,7 @@ public class Personagem extends Termo implements Serializable{
         System.out.println("iniciando salvar personagem");
         personagensNew.add((Personagem) termo);
         
-        fileConfig.salvarTermo(personagensNew);
+        cadastrarPersonagens(personagensNew);
         
         System.out.println("finalizando salvar personagem");    
     }
@@ -102,6 +102,33 @@ public class Personagem extends Termo implements Serializable{
         System.out.println("finalizando pesquisa de personagens por termo");
         
         return pesquisaPersonagens;
+    }
+    
+    
+    /**
+     * Recebe o personagem a ser excluido e o remove do arquivo Personagem.dat
+     * 
+     * @param termo instanceof Personagem
+     */
+    @Override
+    public void removerTermo(Termo termo) {
+        List<Personagem> personagens = (List<Personagem>) retornaTermos();
+        Personagem p = (Personagem) termo;
+        
+        personagens.removeIf(x -> ehIgual(p, x));
+        
+        cadastrarPersonagens(personagens);
+    }
+    
+    private void cadastrarPersonagens(List<Personagem> personagens) {
+        fileConfig.salvarTermo(personagens);
+    }
+    
+    private boolean ehIgual (Personagem p, Personagem x) {
+        return x.getNome().equals(p.getNome()) &&
+                    x.getCaracteristicas().equals(p.getCaracteristicas()) &&
+                    x.getDescricao().equals(p.getDescricao()) &&
+                    x.getFeitos().equals(x.getFeitos());
     }
 
     public String getCaracteristicas() {

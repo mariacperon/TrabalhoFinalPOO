@@ -34,7 +34,7 @@ public class TermoGeral extends Termo implements Serializable{
         System.out.println("iniciando salvar TermoGeral");
         termosGeraisNew.add((TermoGeral) termo);
         
-        fileConfig.salvarTermo(termosGeraisNew);
+        cadastrarGeral(termosGeraisNew);
         
         System.out.println("finalizando salvar TermoGeral");
     }
@@ -86,6 +86,30 @@ public class TermoGeral extends Termo implements Serializable{
         return pesquisaTermos;
     }
     
+    /**
+     * Recebe o termo geral a ser excluido e o remove do arquivo TermoGeral.dat
+     * 
+     * @param termo instanceof TermoGeral
+     */
+    @Override
+    public void removerTermo(Termo termo) {
+        List<TermoGeral> termosGerais = (List<TermoGeral>) retornaTermos();
+        TermoGeral p = (TermoGeral) termo;
+        
+        termosGerais.removeIf(x -> ehIgual(p, x));
+        
+        cadastrarGeral(termosGerais);
+    }
+    
+    private void cadastrarGeral(List<TermoGeral> gerais) {
+        fileConfig.salvarTermo(gerais);
+    }
+    
+    private boolean ehIgual (TermoGeral p, TermoGeral x) {
+        return x.getNome().equals(p.getNome()) &&
+                    x.getDescricao().equals(p.getDescricao());
+    }
+
     @Override
     public String toString() {
         return "TermoGeral={" + 

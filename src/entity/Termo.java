@@ -33,6 +33,8 @@ public abstract class Termo implements Serializable{
     public abstract List<? extends Termo> retornaTermos();
     
     public abstract List<? extends Termo> filtrarTermos(String termo);
+    
+    public abstract void removerTermo(Termo termo);
 
     public String getNome() {
         return nome;

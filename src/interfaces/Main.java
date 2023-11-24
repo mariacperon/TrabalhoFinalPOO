@@ -44,6 +44,10 @@ public class Main {
         termoConfig.cadastrarTermo(termo);
         
         System.out.println(termoConfig.retornaTermos());
+        
+        termoConfig.removerTermo(termo);
+        
+        System.out.println(termoConfig.retornaTermos());
     }
     
     private static Termo cadastraTermo(Termo termo) {
