@@ -3,9 +3,11 @@ package interfaces;
 import entity.Categoria;
 import entity.Lugar;
 import entity.Obra;
-import java.util.ArrayList;
-import java.util.Date;
+import entity.Personagem;
+import entity.Termo;
+import entity.TermoGeral;
 import java.util.List;
+import java.util.Scanner;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,16 +21,39 @@ import java.util.List;
  */
 public class Main {
     
+    
     public static void main(String[] args) {
-        Lugar lugarConfig = new Lugar();
+        Scanner sc = new Scanner(System.in);
         
-        lugarConfig.cadastrarLugar(mockarLugar());
+        System.out.println("L - para lugar: \n"
+                + "P - para personagem \n"
+                + "G - para geral");
+        String resp = sc.next();
         
-        System.out.println(lugarConfig.retornaLugares());
+        Termo termoConfig = null;
         
-        List<Lugar> lugares = lugarConfig.buscarLugares("JOGO");
+        if (resp.equalsIgnoreCase("l")) {
+            termoConfig = new Lugar();
+        } else if (resp.equalsIgnoreCase("p")) {
+            termoConfig = new Personagem();
+        } else {
+            termoConfig = new TermoGeral();
+        }
         
-        System.out.println(lugares);
+        Termo termo = cadastraTermo(termoConfig);
+        termoConfig.cadastrarTermo(termo);
+        
+        System.out.println(termoConfig.retornaTermos());
+    }
+    
+    private static Termo cadastraTermo(Termo termo) {
+        if (termo instanceof Lugar) {
+            return mockarLugar();
+        } else if (termo instanceof Personagem) {
+            return mockarPersonagem();
+        }
+        
+        return mockarGeral();
     }
     
     private static Lugar mockarLugar() {
@@ -39,5 +64,27 @@ public class Main {
         lugar.setObras(List.of(obr1, obr2));
         
         return lugar;
+    }
+    
+    private static Personagem mockarPersonagem() {
+        Personagem personagem = new Personagem("Teste Silva", "teste teste", 
+                "Loiro chato", List.of("Aquele loirinho la"), "Ser chato e feio");
+        Obra obr1 = new Obra("Livro 1", Categoria.LIVRO, 2023, 1, 1);
+        Obra obr2 = new Obra("Filme 1", Categoria.FILME, 2024, 1, 1);
+        
+        personagem.setObras(List.of(obr1, obr2));
+        
+        return personagem;
+    }
+    
+    private static TermoGeral mockarGeral() {
+        TermoGeral geral = new TermoGeral("Livro", "Livro grandao");
+        
+        Obra obr1 = new Obra("Livro 2", Categoria.LIVRO, 2023, 1, 1);
+        Obra obr2 = new Obra("Filme 3", Categoria.FILME, 2024, 1, 1);
+        
+        geral.setObras(List.of(obr1, obr2));
+        
+        return geral;
     }
 }

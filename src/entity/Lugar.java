@@ -34,46 +34,27 @@ public class Lugar extends Termo implements Serializable{
         this.descricaoDetalhada = descricaoDetalhada;
     }
     
-    public void cadastrarLugar(Lugar lugar) {        
-        List<Lugar> lugaresNew = retornaLugares();
+    @Override
+    public void cadastrarTermo(Termo termo) {
+        List<Lugar> lugaresNew = (List<Lugar>) retornaTermos();
         
         System.out.println("iniciando salvar lugares");
-        lugaresNew.add(lugar);
+        lugaresNew.add((Lugar) termo);
         
-        salvarLugar(lugaresNew);
+        fileConfig.salvarTermo(lugaresNew);
         
         System.out.println("finalizando salvar lugares");
     }
     
-    private void salvarLugar(List<Lugar> lugares) {        
-        File arquivo = new File("ect\\Lugar.dat");
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(arquivo))) {
-            oos.writeObject(lugares);
-            oos.flush();
-        } catch (Exception ex) {
-            return;
-        }
+    @Override
+    public List<? extends Termo> retornaTermos() {
+        return fileConfig.retornaTermos(new Lugar());
     }
     
-    public List<Lugar> retornaLugares() {
-        List<Lugar> lugares = new ArrayList<>();
-        File arquivo = new File("ect\\Lugar.dat");
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(arquivo))) {
-            List<Lugar> lugaresRetorno = (List<Lugar>) ois.readObject();
-            
-            for (Lugar lugar : lugaresRetorno) {
-                lugares.add(lugar);
-            }
-        } catch (Exception ex) {
-            return lugares;
-        }
-        
-        return lugares;
-    }
-    
-    public List<Lugar> buscarLugares(String termo) {
+    @Override
+    public List<? extends Termo> filtrarTermos(String termo) {
         System.out.println("iniciando pesquisa de lugares por termo");
-        List<Lugar> lugares = retornaLugares();
+        List<Lugar> lugares = (List<Lugar>) retornaTermos();
         List<Lugar> pesquisaLugares = new ArrayList<>();
         
         for(Lugar lugar: lugares){
@@ -101,7 +82,7 @@ public class Lugar extends Termo implements Serializable{
         
         return pesquisaLugares;
     }
-
+    
     public String getDescricaoDetalhada() {
         return descricaoDetalhada;
     }
@@ -112,12 +93,12 @@ public class Lugar extends Termo implements Serializable{
 
     @Override
     public String toString() {
-        return "Lugar{" + 
+        return "Lugar={" + 
                 "nome=" + getNome() +
                 ", descricao=" + getDescricao() +
                 ", obras=" + getObras() +
                 ", descricaoDetalhada=" + descricaoDetalhada + 
                 '}';
-    }
+    } 
     
 }

@@ -5,6 +5,7 @@
  */
 package entity;
 
+import config.FileConfig;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -38,46 +39,27 @@ public class Personagem extends Termo implements Serializable{
         this.feitos = feitos;
     }
     
-    public void cadastrarPersonagem(Personagem personagem) {
-        List<Personagem> personagensNew = retornaPersonagens();
+    @Override
+    public void cadastrarTermo(Termo termo) {
+        List<Personagem> personagensNew = (List<Personagem>) retornaTermos();
         
         System.out.println("iniciando salvar personagem");
-        personagensNew.add(personagem);
+        personagensNew.add((Personagem) termo);
         
-        salvarPersonagem(personagensNew);
+        fileConfig.salvarTermo(personagensNew);
         
-        System.out.println("finalizando salvar personagem");
+        System.out.println("finalizando salvar personagem");    
     }
-    
-    private void salvarPersonagem(List<Personagem> personagens) {        
-        File arquivo = new File("ect\\Personagem.dat");
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(arquivo))) {
-            oos.writeObject(personagens);
-            oos.flush();
-        } catch (Exception ex) {
-            return;
-        }
+
+    @Override
+    public List<? extends Termo> retornaTermos() {
+        return fileConfig.retornaTermos(new Personagem());
     }
-    
-    public List<Personagem> retornaPersonagens() {
-        List<Personagem> personagens = new ArrayList<>();
-        File arquivo = new File("ect\\Personagem.dat");
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(arquivo))) {
-            List<Personagem> personagensRetorno = (List<Personagem>) ois.readObject();
-            
-            for (Personagem personagem : personagensRetorno) {
-                personagens.add(personagem);
-            }
-        } catch (Exception ex) {
-            return personagens;
-        }
-        
-        return personagens;
-    }
-    
-    public List<Personagem> buscarPersonagens(String termo) {
+
+    @Override
+    public List<? extends Termo> filtrarTermos(String termo) {
         System.out.println("iniciando pesquisa de personagens por termo");
-        List<Personagem> personagens = retornaPersonagens();
+        List<Personagem> personagens = (List<Personagem>) retornaTermos();
         List<Personagem> pesquisaPersonagens = new ArrayList<>();
         
         for(Personagem personagem: personagens){
@@ -135,5 +117,17 @@ public class Personagem extends Termo implements Serializable{
     public void setFeitos(String feitos) {
         this.feitos = feitos;
     }    
+    
+    @Override
+    public String toString() {
+        return "Personagem={" + 
+                "nome=" + getNome() +
+                ", descricao=" + getDescricao() +
+                ", caracteristicas=" + caracteristicas + 
+                ", atores=" + atores + 
+                ", feitos=" + feitos + 
+                ", obras=" + getObras() +
+                '}';
+    } 
     
 }

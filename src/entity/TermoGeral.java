@@ -4,6 +4,7 @@
  */
 package entity;
 
+import config.FileConfig;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -20,51 +21,35 @@ import java.util.UUID;
  * @author note-maria
  */
 public class TermoGeral extends Termo implements Serializable{
+        
+    public TermoGeral() {
+    }
 
     public TermoGeral(String nome, String descricao) {
         super(nome, descricao);
     }  
     
-    public void cadastrarTermoGeral(TermoGeral termoGeral) {
-        List<TermoGeral> termosGeraisNew = retornaTermosGerais();
+    @Override
+    public void cadastrarTermo(Termo termo) {
+        List<TermoGeral> termosGeraisNew = (List<TermoGeral>) retornaTermos();
         
         System.out.println("iniciando salvar TermoGeral");
-        termosGeraisNew.add(termoGeral);
+        termosGeraisNew.add((TermoGeral) termo);
         
-        salvarTermoGeral(termosGeraisNew);
+        fileConfig.salvarTermo(termosGeraisNew);
         
         System.out.println("finalizando salvar TermoGeral");
     }
-    
-    private void salvarTermoGeral(List<TermoGeral> termosGerais) {        
-        File arquivo = new File("ect\\Geral.dat");
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(arquivo))) {
-            oos.writeObject(termosGerais);
-            oos.flush();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+
+    @Override
+    public List<? extends Termo> retornaTermos() {
+        return fileConfig.retornaTermos(new TermoGeral());
     }
-    
-    public List<TermoGeral> retornaTermosGerais() {
-        List<TermoGeral> termosGerais = new ArrayList<>();
-        File arquivo = new File("ect\\Geral.dat");
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(arquivo))) {
-            List<TermoGeral> termosGeraisRetorno = (List<TermoGeral>) ois.readObject();
-            
-            for (TermoGeral termoGeral : termosGeraisRetorno) {
-                termosGerais.add(termoGeral);
-            }
-        } catch (Exception ex) {
-            return termosGerais;
-        }
-        
-        return termosGerais;
-    }
-    
-    public List<TermoGeral> buscarLugares(String termo) {
+
+    @Override
+    public List<? extends Termo> filtrarTermos(String termo) {
         System.out.println("iniciando pesquisa de lugares por termo");
-        List<TermoGeral> termos = retornaTermosGerais();
+        List<TermoGeral> termos = (List<TermoGeral>) retornaTermos();
         List<TermoGeral> pesquisaTermos = new ArrayList<>();
         
         for(TermoGeral termoGeral: termos){
@@ -90,4 +75,14 @@ public class TermoGeral extends Termo implements Serializable{
         
         return pesquisaTermos;
     }
+    
+    @Override
+    public String toString() {
+        return "TermoGeral={" + 
+                "nome=" + getNome() +
+                ", descricao=" + getDescricao() +
+                ", obras=" + getObras() + 
+                '}';
+    } 
+    
 }

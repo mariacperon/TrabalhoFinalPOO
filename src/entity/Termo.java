@@ -5,10 +5,9 @@
  */
 package entity;
 
+import config.FileConfig;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -20,12 +19,20 @@ public abstract class Termo implements Serializable{
     private String descricao;
     private List<Obra> obras;
     
+    FileConfig fileConfig = new FileConfig();
+    
     public Termo() {}
 
     public Termo(String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;
     }
+    
+    public abstract void cadastrarTermo(Termo termo);
+    
+    public abstract List<? extends Termo> retornaTermos();
+    
+    public abstract List<? extends Termo> filtrarTermos(String termo);
 
     public String getNome() {
         return nome;
