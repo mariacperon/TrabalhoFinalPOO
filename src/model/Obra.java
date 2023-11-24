@@ -39,8 +39,8 @@ public class Obra implements Serializable{
         return anoLancamento;
     }
 
-    public void setAnoLancamento(Date anoLancamento) {
-        this.anoLancamento = anoLancamento;
+    public void setAnoLancamento(int ANO, int MES, int DIA) {
+        this.anoLancamento = new Date(ANO-1900, MES-1, DIA);
     }
 
     public Categoria getCategoria() {
