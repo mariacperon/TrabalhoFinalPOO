@@ -4,9 +4,9 @@
  */
 package config;
 
-import entity.Lugar;
-import entity.Personagem;
-import entity.Termo;
+import model.Lugar;
+import model.Personagem;
+import model.Termo;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

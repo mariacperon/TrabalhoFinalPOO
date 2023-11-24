@@ -1,11 +1,11 @@
-package interfaces;
+package io;
 
-import entity.Categoria;
-import entity.Lugar;
-import entity.Obra;
-import entity.Personagem;
-import entity.Termo;
-import entity.TermoGeral;
+import model.Categoria;
+import model.Lugar;
+import model.Obra;
+import model.Personagem;
+import model.Termo;
+import model.TermoGeral;
 import java.util.List;
 import java.util.Scanner;
 
