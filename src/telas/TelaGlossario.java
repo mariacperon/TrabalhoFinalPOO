@@ -264,21 +264,21 @@ public class TelaGlossario extends javax.swing.JFrame {
         // TODO add your handling code here:
         int row = tabelaLugar.getSelectedRow();
         Lugar lugar = invisibleLugares.get(row);
-        JOptionPane.showMessageDialog(null, lugar);
+        new TelaInfosLugares(lugar, this).setVisible(true);
     }//GEN-LAST:event_tabelaLugarMouseClicked
 
     private void tabelaPersonagemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPersonagemMouseClicked
         // TODO add your handling code here:
         int row = tabelaPersonagem.getSelectedRow();
         Personagem personagem = invisiblePersonagens.get(row);
-        JOptionPane.showMessageDialog(null, personagem);
+        new TelaInfosPersonagens(personagem, this).setVisible(true);
     }//GEN-LAST:event_tabelaPersonagemMouseClicked
 
     private void tabelaGeralMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaGeralMouseClicked
         // TODO add your handling code here:
         int row = tabelaGeral.getSelectedRow();
         TermoGeral geral = invisibleGerais.get(row);
-        JOptionPane.showMessageDialog(null, geral);
+        new TelaInfosGerais(geral, this).setVisible(true);
     }//GEN-LAST:event_tabelaGeralMouseClicked
     
     /**
