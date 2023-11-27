@@ -4,15 +4,13 @@
  */
 package telas;
 
-import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import javax.swing.DefaultListModel;
-import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListModel;
 import javax.swing.table.DefaultTableModel;
@@ -29,12 +27,11 @@ import model.TermoGeral;
  */
 public class TelaCadastro extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TelaCadastro
-     */
-    public TelaCadastro() {
+    public TelaCadastro(TelaGlossario telaGlossario) {
         initComponents();
+        //this.telaGlossario = telaGlossario;
         tabsTipos.setVisible(false);
+        this.telaGlossario = telaGlossario;
         setFrameSize();
     }
 
@@ -52,7 +49,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        buttonSalvarTermo = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         selectTipo = new javax.swing.JComboBox<>();
         fieldNome = new javax.swing.JTextField();
@@ -60,15 +57,16 @@ public class TelaCadastro extends javax.swing.JFrame {
         tabsTipos = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        fieldDescricao2 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        fieldFeitos = new javax.swing.JTextArea();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         listAtores = new javax.swing.JList<>();
         fieldAtor = new javax.swing.JTextField();
         buttonAdicionarAtores = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        fieldCaracteristicas = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -96,11 +94,11 @@ public class TelaCadastro extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton2.setText("Salvar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        buttonSalvarTermo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        buttonSalvarTermo.setText("Salvar");
+        buttonSalvarTermo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                buttonSalvarTermoActionPerformed(evt);
             }
         });
 
@@ -114,15 +112,17 @@ public class TelaCadastro extends javax.swing.JFrame {
             }
         });
 
+        tabsTipos.setEnabled(false);
+
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setText("Características:");
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel9.setText("Feitos:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        fieldFeitos.setColumns(20);
+        fieldFeitos.setRows(5);
+        jScrollPane1.setViewportView(fieldFeitos);
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel10.setText("Atores:");
@@ -142,6 +142,10 @@ public class TelaCadastro extends javax.swing.JFrame {
             }
         });
 
+        fieldCaracteristicas.setColumns(20);
+        fieldCaracteristicas.setRows(5);
+        jScrollPane5.setViewportView(fieldCaracteristicas);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -149,7 +153,7 @@ public class TelaCadastro extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonAdicionarAtores)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,9 +162,9 @@ public class TelaCadastro extends javax.swing.JFrame {
                             .addComponent(jLabel10))
                         .addGap(59, 59, 59)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(fieldDescricao2, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
-                            .addComponent(fieldAtor, javax.swing.GroupLayout.Alignment.LEADING))))
+                            .addComponent(fieldAtor, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -168,9 +172,9 @@ public class TelaCadastro extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fieldDescricao2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel8)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -181,8 +185,8 @@ public class TelaCadastro extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonAdicionarAtores)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tabsTipos.addTab("Personagem", jPanel1);
@@ -257,7 +261,7 @@ public class TelaCadastro extends javax.swing.JFrame {
                                         .addComponent(selectTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(fieldNome)
                                         .addComponent(fieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addComponent(buttonSalvarTermo, javax.swing.GroupLayout.Alignment.TRAILING))
                             .addComponent(buttonVncularObras)
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(25, 25, 25)
@@ -272,10 +276,9 @@ public class TelaCadastro extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
                 .addGap(25, 25, 25)
-                .addComponent(jButton2)
+                .addComponent(buttonSalvarTermo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tabsTipos, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
@@ -293,8 +296,9 @@ public class TelaCadastro extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(buttonVncularObras)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addComponent(tabsTipos, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)))
         );
 
         pack();
@@ -309,9 +313,34 @@ public class TelaCadastro extends javax.swing.JFrame {
     
     TelaCadastroObra tco = new TelaCadastroObra(this);
     
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    TelaGlossario telaGlossario = null;
+    
+    private void buttonSalvarTermoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarTermoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        Termo termo = null;
+        if(validaCamposTermo()) {
+            switch (tipoSelect) {
+                case "Geral":
+                    termo = retornaNovoGeral();
+                    break;
+                case "Personagem":
+                    termo = retornaNovoPersonagem();
+                    break;
+                case "Lugar":
+                    termo = retornaNovoLugar();
+                    break;
+                default:
+                    break;
+            }
+            
+            if (termo != null) {
+                termo.setObras(obras);
+                termo.cadastrarTermo(termo);
+                setVisible(false);
+                telaGlossario.atualizaTabela(termo);
+            }
+        }
+    }//GEN-LAST:event_buttonSalvarTermoActionPerformed
 
     private void buttonAdicionarAtoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarAtoresActionPerformed
         // TODO add your handling code here:
@@ -357,6 +386,52 @@ public class TelaCadastro extends javax.swing.JFrame {
         tco.setVisible(true);
     }//GEN-LAST:event_buttonVncularObrasActionPerformed
 
+    private Lugar retornaNovoLugar() {
+        if(fieldDescricaoDetalhada.getText().isBlank() || fieldDescricaoDetalhada.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Características não pode estar vazio");
+            return null;
+        }
+        
+        return new Lugar(fieldNome.getText(), fieldDescricao.getText(),
+          fieldDescricaoDetalhada.getText());
+    }
+    
+    private Personagem retornaNovoPersonagem() {
+        if(fieldCaracteristicas.getText().isBlank() || fieldCaracteristicas.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Características não pode estar vazio");
+            return null;
+        }
+        if(atores.isEmpty()){
+            JOptionPane.showMessageDialog(null, "O campo Atores não pode estar vazio");
+            return null;
+        }
+        if(fieldFeitos.getText().isBlank() || fieldFeitos.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Feitos não pode estar vazio");
+            return null;
+        }
+        
+        return new Personagem(fieldNome.getText(), fieldDescricao.getText(),
+          fieldCaracteristicas.getText(), atores, fieldFeitos.getText());
+    }
+    
+    private TermoGeral retornaNovoGeral() {
+        return new TermoGeral(fieldNome.getText(), fieldDescricao.getText());
+
+    }
+    
+    private boolean validaCamposTermo() {
+        if(fieldNome.getText().isBlank() || fieldNome.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Nome inválido");
+            return false;
+        }
+        if (fieldDescricao.getText().isBlank() || fieldDescricao.getText().isBlank()){
+            JOptionPane.showMessageDialog(null, "Descriçãp inválida");
+            return false;
+        }
+        
+        return true;
+    }
+    
     public TableModel setListaObras(){
         DefaultTableModel model = new DefaultTableModel(){
             @Override
@@ -416,13 +491,14 @@ public class TelaCadastro extends javax.swing.JFrame {
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdicionarAtores;
+    private javax.swing.JButton buttonSalvarTermo;
     private javax.swing.JButton buttonVncularObras;
     private javax.swing.JTextField fieldAtor;
+    private javax.swing.JTextArea fieldCaracteristicas;
     private javax.swing.JTextField fieldDescricao;
-    private javax.swing.JTextField fieldDescricao2;
     private javax.swing.JTextArea fieldDescricaoDetalhada;
+    private javax.swing.JTextArea fieldFeitos;
     private javax.swing.JTextField fieldNome;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -439,7 +515,7 @@ public class TelaCadastro extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JList<String> listAtores;
     private javax.swing.JComboBox<String> selectTipo;
     private javax.swing.JTable tabelaObras;

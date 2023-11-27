@@ -185,7 +185,7 @@ public class TelaGlossario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public TelaCadastro telaCadastro = new TelaCadastro();
+    public TelaCadastro telaCadastro = new TelaCadastro(this);
     
     private static Termo lConfig = new Lugar();
     private static Termo pConfig = new Personagem();
@@ -197,7 +197,7 @@ public class TelaGlossario extends javax.swing.JFrame {
     private static List<Personagem> invisiblePersonagens = new ArrayList<>();
     private static List<TermoGeral> invisibleGerais = new ArrayList<>();
     
-    private TableModel setListaTermos(Termo instance, List<? extends Termo> termosFiltrados){
+    public TableModel setListaTermos(Termo instance, List<? extends Termo> termosFiltrados){
         DefaultTableModel model = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -329,8 +329,8 @@ public class TelaGlossario extends javax.swing.JFrame {
     
     private static Lugar mockarLugar() {
         Lugar lugar = new Lugar("jardim", "teste teste", "testetestetestes");
-        Obra obr1 = new Obra("teste", Categoria.JOGOS, 2023, 1, 1);
-        Obra obr2 = new Obra("teste2", Categoria.FILME, 2024, 1, 1);
+        Obra obr1 = new Obra("teste", Categoria.JOGOS, 2023);
+        Obra obr2 = new Obra("teste2", Categoria.FILME, 2024);
         
         lugar.setObras(List.of(obr1, obr2));
         
@@ -340,8 +340,8 @@ public class TelaGlossario extends javax.swing.JFrame {
     private static Personagem mockarPersonagem() {
         Personagem personagem = new Personagem("Teste Silva", "teste teste", 
                 "Loiro chato", List.of("Aquele loirinho la"), "Ser chato e feio");
-        Obra obr1 = new Obra("Livro 1", Categoria.LIVRO, 2023, 1, 1);
-        Obra obr2 = new Obra("Filme 1", Categoria.FILME, 2024, 1, 1);
+        Obra obr1 = new Obra("Livro 1", Categoria.LIVRO, 2023);
+        Obra obr2 = new Obra("Filme 1", Categoria.FILME, 2024);
         
         personagem.setObras(List.of(obr1, obr2));
         
@@ -351,12 +351,22 @@ public class TelaGlossario extends javax.swing.JFrame {
     private static TermoGeral mockarGeral() {
         TermoGeral geral = new TermoGeral("Livro", "Livro grandao");
         
-        Obra obr1 = new Obra("Livro 2", Categoria.LIVRO, 2023, 1, 1);
-        Obra obr2 = new Obra("Filme 3", Categoria.FILME, 2024, 1, 1);
+        Obra obr1 = new Obra("Livro 2", Categoria.LIVRO, 2023);
+        Obra obr2 = new Obra("Filme 3", Categoria.FILME, 2024);
         
         geral.setObras(List.of(obr1, obr2));
         
         return geral;
+    }
+    
+    public void atualizaTabela(Termo termo) {
+        if(termo instanceof Personagem) {
+            tabelaPersonagem.setModel(setListaTermos(termo, null));
+        } else if (termo instanceof Lugar) {
+            tabelaLugar.setModel(setListaTermos(termo, null));
+        } else {
+            tabelaGeral.setModel(setListaTermos(termo, null));
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

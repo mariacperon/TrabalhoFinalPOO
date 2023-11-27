@@ -7,6 +7,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,9 +22,28 @@ public class Obra implements Serializable{
     public Obra() {
     }
 
-    public Obra(String nome, Categoria categoria, int ANO, int MES, int DIA) {
+    public Obra(String nome, Categoria categoria, String ANO) {
+        int anoInt = 0;
+        try {
+            anoInt = Integer.parseInt(ANO);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "O ano é inválido");
+            return;
+        }
+        
+        if (nome.isBlank() || nome.isBlank()) {
+            JOptionPane.showMessageDialog(null, "O nome da obra está inválido");
+            return;
+        }
+        
         this.nome = nome;
-        this.anoLancamento = new Date(ANO-1900, MES-1, DIA);
+        this.anoLancamento = new Date(anoInt-1900, 0, 0);
+        this.categoria = categoria;
+    }
+    
+    public Obra(String nome, Categoria categoria, int ANO){
+        this.nome = nome;
+        this.anoLancamento = new Date(ANO-1900, 0, 0);
         this.categoria = categoria;
     }
     

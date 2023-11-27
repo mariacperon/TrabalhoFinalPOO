@@ -4,6 +4,7 @@
  */
 package telas;
 
+import java.util.Objects;
 import javax.swing.JOptionPane;
 import model.Categoria;
 import model.Obra;
@@ -130,9 +131,9 @@ public class TelaCadastroObra extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(selectCat, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(selectCat, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel6)
                         .addContainerGap(31, Short.MAX_VALUE))
@@ -168,17 +169,12 @@ public class TelaCadastroObra extends javax.swing.JFrame {
     }//GEN-LAST:event_selectCatActionPerformed
 
     private void validaObra() {
-        int anoInt = 0;
+        obra = new Obra(fieldNomeObra.getText(), categoria, fieldAnoObra.getText());
         
-        try {
-            anoInt = Integer.parseInt(fieldAnoObra.getText());
-            obra = new Obra(fieldNomeObra.getText(), categoria, anoInt, 0, 0);
+        if(obra.getNome() != null) {
             setVisible(false);
             telaCadastro.setListaObras();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "O ano é inválido");
         }
-        
     }
     
     /**

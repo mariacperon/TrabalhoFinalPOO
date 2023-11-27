@@ -62,8 +62,8 @@ public class Main {
     
     private static Lugar mockarLugar() {
         Lugar lugar = new Lugar("jardim", "teste teste", "testetestetestes");
-        Obra obr1 = new Obra("teste", Categoria.JOGOS, 2023, 1, 1);
-        Obra obr2 = new Obra("teste2", Categoria.FILME, 2024, 1, 1);
+        Obra obr1 = new Obra("teste", Categoria.JOGOS, 2023);
+        Obra obr2 = new Obra("teste2", Categoria.FILME, 2024);
         
         lugar.setObras(List.of(obr1, obr2));
         
@@ -73,8 +73,8 @@ public class Main {
     private static Personagem mockarPersonagem() {
         Personagem personagem = new Personagem("Teste Silva", "teste teste", 
                 "Loiro chato", List.of("Aquele loirinho la"), "Ser chato e feio");
-        Obra obr1 = new Obra("Livro 1", Categoria.LIVRO, 2023, 1, 1);
-        Obra obr2 = new Obra("Filme 1", Categoria.FILME, 2024, 1, 1);
+        Obra obr1 = new Obra("Livro 1", Categoria.LIVRO, 2023);
+        Obra obr2 = new Obra("Filme 1", Categoria.FILME, 2024);
         
         personagem.setObras(List.of(obr1, obr2));
         
@@ -84,8 +84,8 @@ public class Main {
     private static TermoGeral mockarGeral() {
         TermoGeral geral = new TermoGeral("Livro", "Livro grandao");
         
-        Obra obr1 = new Obra("Livro 2", Categoria.LIVRO, 2023, 1, 1);
-        Obra obr2 = new Obra("Filme 3", Categoria.FILME, 2024, 1, 1);
+        Obra obr1 = new Obra("Livro 2", Categoria.LIVRO, 2023);
+        Obra obr2 = new Obra("Filme 3", Categoria.FILME, 2024);
         
         geral.setObras(List.of(obr1, obr2));
         
