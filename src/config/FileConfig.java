@@ -32,8 +32,8 @@ public class FileConfig implements Serializable{
      * 
      * @param termos 
      */
-    public void salvarTermo(List<? extends Termo> termos) {        
-        File arquivo = new File("ect\\"+  retornaFileName(termos));
+    public void salvarTermo(List<? extends Termo> termos, Termo termo) {        
+        File arquivo = new File("ect\\"+  retornaFileName(termo));
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(arquivo))) {
             oos.writeObject(termos);
             oos.flush();
@@ -51,7 +51,7 @@ public class FileConfig implements Serializable{
      */
     public List<? extends Termo> retornaTermos(Termo termo) {
         List<? extends Termo> termos = new ArrayList<>();
-        File arquivo = new File("ect\\"+ retornaFileName(List.of(termo)));
+        File arquivo = new File("ect\\"+ retornaFileName(termo));
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(arquivo))) {
             termos = (List<? extends Termo>) ois.readObject();
 
@@ -62,7 +62,7 @@ public class FileConfig implements Serializable{
         return termos;
     }
     
-    private String retornaFileName(List<? extends Termo> termo){
+    private String retornaFileName(Termo termo){
         if (termo instanceof Personagem) {
             return FILE_PERSONAGEM;
         } else if (termo instanceof Lugar) {

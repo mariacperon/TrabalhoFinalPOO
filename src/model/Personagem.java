@@ -121,7 +121,7 @@ public class Personagem extends Termo implements Serializable{
     }
     
     private void cadastrarPersonagens(List<Personagem> personagens) {
-        fileConfig.salvarTermo(personagens);
+        fileConfig.salvarTermo(personagens, new Personagem());
     }
     
     private boolean ehIgual (Personagem p, Personagem x) {

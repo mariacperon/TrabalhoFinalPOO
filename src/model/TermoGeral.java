@@ -102,7 +102,7 @@ public class TermoGeral extends Termo implements Serializable{
     }
     
     private void cadastrarGeral(List<TermoGeral> gerais) {
-        fileConfig.salvarTermo(gerais);
+        fileConfig.salvarTermo(gerais, new TermoGeral());
     }
     
     private boolean ehIgual (TermoGeral p, TermoGeral x) {

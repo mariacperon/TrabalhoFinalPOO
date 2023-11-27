@@ -109,7 +109,7 @@ public class Lugar extends Termo implements Serializable{
     }
     
     private void cadastrarLugares(List<Lugar> lugares) {
-        fileConfig.salvarTermo(lugares);
+        fileConfig.salvarTermo(lugares, new Lugar());
     }
     
     private boolean ehIgual (Lugar p, Lugar x) {
