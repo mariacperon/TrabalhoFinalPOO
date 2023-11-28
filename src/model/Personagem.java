@@ -88,12 +88,14 @@ public class Personagem extends Termo implements Serializable{
             } else {
                 if (personagem.getObras() != null) {
                     for(Obra obra : personagem.getObras()) {
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
-                        if(obra.getNome().toLowerCase().contains(filtro.toLowerCase())) {
-                            pesquisaPersonagens.add(personagem);
-                        } else if (obra.getCategoria().toString().toLowerCase().contains(filtro.toLowerCase())) {
-                            pesquisaPersonagens.add(personagem);
+                        if (obra != null) {
+                            if(obra.getNome().toLowerCase().contains(filtro.toLowerCase())) {
+                                pesquisaPersonagens.add(personagem);
+                            } else if (obra.getCategoria().toString().toLowerCase().contains(filtro.toLowerCase())) {
+                                pesquisaPersonagens.add(personagem);
+                            }
                         }
+                        
                     }
                 }
                 

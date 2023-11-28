@@ -70,12 +70,14 @@ public class TermoGeral extends Termo implements Serializable{
             } else {
                 if (termoGeral.getObras() != null) {
                     for(Obra obra : termoGeral.getObras()) {
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
-                        if(obra.getNome().toLowerCase().contains(filtro.toLowerCase())) {
-                            pesquisaTermos.add(termoGeral);
-                        } else if (obra.getCategoria().toString().toLowerCase().contains(filtro.toLowerCase())) {
-                            pesquisaTermos.add(termoGeral);
+                        if (obra != null) {
+                            if(obra.getNome().toLowerCase().contains(filtro.toLowerCase())) {
+                                pesquisaTermos.add(termoGeral);
+                            } else if (obra.getCategoria().toString().toLowerCase().contains(filtro.toLowerCase())) {
+                                pesquisaTermos.add(termoGeral);
+                            }
                         }
+                        
                     }
                 }
             }
