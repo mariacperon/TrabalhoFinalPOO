@@ -27,6 +27,7 @@ public class TelaGlossario extends javax.swing.JFrame {
      * Creates new form TelaGlossario
      */
     public TelaGlossario() {
+        
         initComponents();
     }
 
@@ -247,7 +248,7 @@ public class TelaGlossario extends javax.swing.JFrame {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        telaCadastro.setVisible(true);
+        new TelaCadastro(this).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped

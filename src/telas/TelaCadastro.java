@@ -28,6 +28,7 @@ import model.TermoGeral;
 public class TelaCadastro extends javax.swing.JFrame {
 
     public TelaCadastro(TelaGlossario telaGlossario) {
+        obras = new ArrayList<>();
         initComponents();
         //this.telaGlossario = telaGlossario;
         tabsTipos.setVisible(false);

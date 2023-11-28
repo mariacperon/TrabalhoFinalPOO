@@ -77,10 +77,7 @@ public class Lugar extends Termo implements Serializable{
             } else {
                 if (lugar.getObras() != null) {
                     for(Obra obra : lugar.getObras()) {
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
-                        if (sdf.format(obra.getAnoLancamento()).contains(filtro.toLowerCase())) {
-                            pesquisaLugares.add(lugar);
-                        } else if(obra.getNome().toLowerCase().contains(filtro.toLowerCase())) {
+                        if (obra.getNome().toLowerCase().contains(filtro.toLowerCase())) {
                             pesquisaLugares.add(lugar);
                         } else if (obra.getCategoria().toString().toLowerCase().contains(filtro.toLowerCase())) {
                             pesquisaLugares.add(lugar);
