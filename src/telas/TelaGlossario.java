@@ -77,9 +77,6 @@ public class TelaGlossario extends javax.swing.JFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField1KeyReleased(evt);
             }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField1KeyTyped(evt);
-            }
         });
 
         tabelaPersonagem.setModel(setListaTermos(new Personagem(), null));
@@ -253,11 +250,6 @@ public class TelaGlossario extends javax.swing.JFrame {
         // TODO add your handling code here:
         new TelaCadastro(this).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jTextField1KeyTyped
 
     private void tabelaLugarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaLugarMouseClicked
         // TODO add your handling code here:
