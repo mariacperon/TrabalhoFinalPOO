@@ -348,9 +348,9 @@ public class TelaCadastro extends javax.swing.JFrame {
         String ator = fieldAtor.getText();
         if (!ator.isEmpty() && !ator.isBlank()) {
             atores.add(ator);
+            fieldAtor.setText("");
+            montaListaAtores();
         }
-        
-        montaListaAtores();
     }//GEN-LAST:event_buttonAdicionarAtoresActionPerformed
 
     private void listAtoresKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listAtoresKeyReleased
