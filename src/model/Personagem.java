@@ -85,21 +85,7 @@ public class Personagem extends Termo implements Serializable{
                 pesquisaPersonagens.add(personagem);
             } else if (personagem.getAtores().contains(filtro.toLowerCase())) {
                 pesquisaPersonagens.add(personagem);
-            } else {
-                if (personagem.getObras() != null) {
-                    for(Obra obra : personagem.getObras()) {
-                        if (obra != null) {
-                            if(obra.getNome() != null && obra.getNome().toLowerCase().contains(filtro.toLowerCase())) {
-                                pesquisaPersonagens.add(personagem);
-                            } else if (obra.getCategoria().toString().toLowerCase().contains(filtro.toLowerCase())) {
-                                pesquisaPersonagens.add(personagem);
-                            }
-                        }
-                        
-                    }
-                }
-                
-            }
+            } 
         }
         
         System.out.println("finalizando pesquisa de personagens por termo");
