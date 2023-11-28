@@ -77,7 +77,6 @@ public class TelaCadastro extends javax.swing.JFrame {
         tabelaObras = new javax.swing.JTable();
 
         setTitle("Novo Termo");
-        setAlwaysOnTop(true);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
         setSize(new java.awt.Dimension(0, 0));
