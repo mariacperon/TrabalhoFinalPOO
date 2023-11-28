@@ -78,7 +78,7 @@ public class Lugar extends Termo implements Serializable{
                 if (lugar.getObras() != null) {
                     for(Obra obra : lugar.getObras()) {
                         if (obra != null) {
-                            if (obra.getNome().toLowerCase().contains(filtro.toLowerCase())) {
+                            if (obra.getNome() != null && obra.getNome().toLowerCase().contains(filtro.toLowerCase())) {
                                 pesquisaLugares.add(lugar);
                             } else if (obra.getCategoria().toString().toLowerCase().contains(filtro.toLowerCase())) {
                                 pesquisaLugares.add(lugar);

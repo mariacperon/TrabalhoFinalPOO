@@ -71,7 +71,7 @@ public class TermoGeral extends Termo implements Serializable{
                 if (termoGeral.getObras() != null) {
                     for(Obra obra : termoGeral.getObras()) {
                         if (obra != null) {
-                            if(obra.getNome().toLowerCase().contains(filtro.toLowerCase())) {
+                            if(obra.getNome() != null && obra.getNome().toLowerCase().contains(filtro.toLowerCase())) {
                                 pesquisaTermos.add(termoGeral);
                             } else if (obra.getCategoria().toString().toLowerCase().contains(filtro.toLowerCase())) {
                                 pesquisaTermos.add(termoGeral);
