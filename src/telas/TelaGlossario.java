@@ -74,6 +74,9 @@ public class TelaGlossario extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/telas/icons/livro.png"))); // NOI18N
 
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextField1KeyTyped(evt);
             }
@@ -253,12 +256,7 @@ public class TelaGlossario extends javax.swing.JFrame {
 
     private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
         // TODO add your handling code here:
-        tabelaLugar.setModel(setListaTermos(new Lugar(), 
-                lConfig.filtrarTermos(jTextField1.getText())));
-        tabelaPersonagem.setModel(setListaTermos(new Personagem(), 
-                pConfig.filtrarTermos(jTextField1.getText())));
-        tabelaGeral.setModel(setListaTermos(new TermoGeral(), 
-                gConfig.filtrarTermos(jTextField1.getText())));
+        
     }//GEN-LAST:event_jTextField1KeyTyped
 
     private void tabelaLugarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaLugarMouseClicked
@@ -281,6 +279,16 @@ public class TelaGlossario extends javax.swing.JFrame {
         TermoGeral geral = invisibleGerais.get(row);
         new TelaInfosGerais(geral, this).setVisible(true);
     }//GEN-LAST:event_tabelaGeralMouseClicked
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        // TODO add your handling code here:
+        tabelaLugar.setModel(setListaTermos(new Lugar(), 
+                lConfig.filtrarTermos(jTextField1.getText())));
+        tabelaPersonagem.setModel(setListaTermos(new Personagem(), 
+                pConfig.filtrarTermos(jTextField1.getText())));
+        tabelaGeral.setModel(setListaTermos(new TermoGeral(), 
+                gConfig.filtrarTermos(jTextField1.getText())));
+    }//GEN-LAST:event_jTextField1KeyReleased
     
     /**
      * @param args the command line arguments
